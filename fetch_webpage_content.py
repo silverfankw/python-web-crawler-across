@@ -2,12 +2,11 @@ import requests
 import mapper
 from bs4 import BeautifulSoup
 
-# PlateNumber  re.compile("^(([A-Z][A-Z]) ?(\d{3,4}))")
-
 def handle_content(ctx):
 	soup = BeautifulSoup(ctx, 'html.parser')
 
-	# Plate Number filter
+	# targets = soup.prettify()
+	# targets = soup.select('a[href$="../index.php?page=11"]')
 	targets = soup.find_all(string=mapper.regex["plate"])
 
 	# print(targets)
@@ -15,7 +14,7 @@ def handle_content(ctx):
 		print(target[:7])
 
 headers = {'Cookie': 'l=0; hints=1; vid=8351569'}
-response = requests.get(f'http://1005.idv.hk/index.php?page=11&p={mapper.type["E6X"]}', headers=headers)
+response = requests.get(f'http://1005.idv.hk/index.php?page=11&p={mapper.type["ASV"]}', headers=headers)
 
 
 # Check redirect

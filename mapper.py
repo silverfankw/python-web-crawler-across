@@ -4,8 +4,11 @@ import re
 
 type = {
   "ASV": "21",
+  "AVBWU": "307",
   "ATENU": "331",
   "E5T": "331",
+  "AMNE": "361",
+  "AMNF": "361",
   "FACELIFT": "366",
   "AVBWL": "390",
   "V6B": "390",
@@ -15,5 +18,6 @@ type = {
 }
 
 regex = {
+  # "fleet": 
   "plate": re.compile("^(([A-Z][A-Z]) ?(\d{3,4}))")
 }
