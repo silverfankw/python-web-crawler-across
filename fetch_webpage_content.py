@@ -2,19 +2,21 @@ import requests
 import mapper
 from bs4 import BeautifulSoup
 
+selection = "V6X"
+
 def handle_content(ctx):
 	soup = BeautifulSoup(ctx, 'html.parser')
 
 	# targets = soup.prettify()
-	# targets = soup.select('a[href$="../index.php?page=11"]')
+	# targets = soup.find_all(href=mapper.regex["fleet"])
 	targets = soup.find_all(string=mapper.regex["plate"])
 
 	# print(targets)
 	for target in targets:
-		print(target[:7])
+		print(target.get_text())
 
 headers = {'Cookie': 'l=0; hints=1; vid=8351569'}
-response = requests.get(f'http://1005.idv.hk/index.php?page=11&p={mapper.type["ASV"]}', headers=headers)
+response = requests.get(f'http://1005.idv.hk/index.php?page=11&p={mapper.type[selection]}', headers=headers)
 
 
 # Check redirect
