@@ -3,20 +3,17 @@ import mapper
 from datetime import datetime
 from bs4 import BeautifulSoup
 
-selection = "ASV"
+selection = "MMCFL"
 
 def handle_content(ctx):
 	soup = BeautifulSoup(ctx, 'html.parser')
-
-	# targets = soup.prettify()
-	# print(targets)
 
 	fleets = soup.find_all(href=mapper.regex["fleet"])
 	plates = soup.find_all(href=mapper.regex["plate"])
 
 	f = open(f'./result/{selection}_result_{datetime.now().strftime("%Y%m%d")}.txt', "w", encoding='UTF-8')
 	for index, fleet in enumerate(fleets):
-		print(f'{fleet.get_text()} {plates[index].get_text()}')
+		# print(f'{fleet.get_text()} {plates[index].get_text()}')
 		f.write(f'{fleet.get_text()} {plates[index].get_text()}\n')
 	f.close()
 
