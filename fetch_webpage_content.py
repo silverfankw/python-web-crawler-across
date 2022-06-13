@@ -1,22 +1,24 @@
 import requests
 import mapper
+from datetime import datetime
 from bs4 import BeautifulSoup
 
-selection = "ATE"
+selection = "ASV"
 
 def handle_content(ctx):
 	soup = BeautifulSoup(ctx, 'html.parser')
 
 	# targets = soup.prettify()
-	fleets = soup.find_all(href=mapper.regex["fleet"])
-	plates = soup.find_all(string=mapper.regex["plate"])
-
 	# print(targets)
-	for fleet in fleets:
-		print(f'{fleet.get_text()}')
-	for plate in plates:
-		print(f'{plate.get_text()}')
 
+	fleets = soup.find_all(href=mapper.regex["fleet"])
+	plates = soup.find_all(href=mapper.regex["plate"])
+
+	f = open(f'./result/{selection}_result_{datetime.now().strftime("%Y%m%d")}.txt', "w", encoding='UTF-8')
+	for index, fleet in enumerate(fleets):
+		print(f'{fleet.get_text()} {plates[index].get_text()}')
+		f.write(f'{fleet.get_text()} {plates[index].get_text()}\n')
+	f.close()
 
 
 headers = {'Cookie': 'l=0; hints=1; vid=8351569'}
